@@ -8,7 +8,8 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state={
-      registration: registrationStore.getFields()
+      registration: registrationStore.getFields(),
+      errors: {}
     }
   }
 
@@ -28,8 +29,15 @@ class App extends Component {
     formInputChange(target.name, target.value)
   }
 
+  validate(){
+    registrationStore.validate()
+    this.setState({errors: registrationStore.getErrors()})
+  }
+
+
   handleSubmit(event){
     event.preventDefault()
+    this.validate()
     console.log(this.state.registration)
   }
 
@@ -51,6 +59,7 @@ class App extends Component {
                           label="First Name"
                           field={this.state.registration.firstName}
                           onChange={this.handleChange.bind(this)}
+                          errors={this.state.errors.firstName}
                         ></FormInput>
                       </div>
                     </div>
@@ -62,6 +71,7 @@ class App extends Component {
                           label="Last Name"
                           field={this.state.registration.lastName}
                           onChange={this.handleChange.bind(this)}
+                          errors={this.state.errors.lastName}
                         ></FormInput>
                       </div>
                     </div>
@@ -73,6 +83,7 @@ class App extends Component {
                           label="Email"
                           field={this.state.registration.email}
                           onChange={this.handleChange.bind(this)}
+                          errors={this.state.errors.email}
                         ></FormInput>
                       </div>
                     </div>
@@ -85,6 +96,7 @@ class App extends Component {
                           field={this.state.registration.password}
                           type="password"
                           onChange={this.handleChange.bind(this)}
+                          errors={this.state.errors.password}
                         ></FormInput>
 
                       </div>

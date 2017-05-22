@@ -9,8 +9,14 @@ class FormInput extends Component {
   }
 
   render(){
+    let hasErrors
+    if(this.props.errors){
+      hasErrors = "has-error"
+    } else {
+      hasErrors = ""
+    }
     return(
-      <div className='form-group'>
+      <div className={`form-group ${hasErrors}`}>
         <label
           htmlFor={this.props.name}
           className='control-label'
